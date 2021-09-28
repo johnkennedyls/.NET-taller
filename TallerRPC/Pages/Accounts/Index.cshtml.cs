@@ -14,6 +14,20 @@ namespace TallerRPC.Pages.Accounts
     {
         private readonly TallerRPC.Data.TallerRPCContext _context;
 
+        [BindProperty(SupportsGet = true)]
+        public static bool AccountSignedIn { get; set; }       
+        [BindProperty(SupportsGet = true)]
+        public bool AccountSigningOut { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string UserNameAccountToTry { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string AccountPasswordToTry { get; set; }
+        [BindProperty(SupportsGet = true)]
+
+        
+        public Account UserSignedAccount { get; set; }
+        
+
         public IndexModel(TallerRPC.Data.TallerRPCContext context)
         {
             _context = context;
@@ -25,5 +39,26 @@ namespace TallerRPC.Pages.Accounts
         {
             Account = await _context.Account.ToListAsync();
         }
-    }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (AccountSigningOut)
+            {
+                AccountSignedIn = false;
+                UserSignedAccount = null;
+            }
+            else{
+                UserSignedAccount = await _context.Account.FirstOrDefaultAsync(m => m.UserName == UserNameAccountToTry && m.Password == AccountPasswordToTry);
+
+                if (UserSignedAccount == null){
+                    return Page();
+                }
+                AccountSignedIn = true;
+                Account = await _context.Account.ToListAsync();
+
+            }
+            return Page();
+        }
+    
+}
 }
