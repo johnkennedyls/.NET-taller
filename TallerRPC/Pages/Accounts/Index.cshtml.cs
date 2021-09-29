@@ -20,11 +20,9 @@ namespace TallerRPC.Pages.Accounts
         public bool AccountSigningOut { get; set; }
         [BindProperty(SupportsGet = true)]
         public string UserNameAccountToTry { get; set; }
-        [BindProperty(SupportsGet = true)]
+        [BindProperty(SupportsGet = true)] 
         public string AccountPasswordToTry { get; set; }
-        [BindProperty(SupportsGet = true)]
 
-        
         public Account UserSignedAccount { get; set; }
         
 
@@ -49,6 +47,7 @@ namespace TallerRPC.Pages.Accounts
             }
             else{
                 UserSignedAccount = await _context.Account.FirstOrDefaultAsync(m => m.UserName == UserNameAccountToTry && m.Password == AccountPasswordToTry);
+
 
                 if (UserSignedAccount == null){
                     return Page();

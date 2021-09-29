@@ -4,10 +4,10 @@
 @{
     ViewData["Title"] = "Index";
 }
+<img src="https://redprogramacioncompetitiva.com/contests/2020/12/images/logoSloganH200V1.png"  width="120" height="200" />
+<h1>RPC</h1>
 
-<h1>Index</h1>
-
-if(IndexModel.AccountSignedIn){
+@if(IndexModel.AccountSignedIn){
 <form method="post">
     <input type="hidden" asp-for="AccountSigningOut" value="true">
     <input type="submit" value="Sign out" />
@@ -48,8 +48,7 @@ if(IndexModel.AccountSignedIn){
                     @Html.DisplayFor(modelItem => item.BirthDay)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    
                     <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
                 </td>
             </tr>

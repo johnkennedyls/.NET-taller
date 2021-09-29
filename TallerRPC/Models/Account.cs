@@ -12,19 +12,28 @@ namespace TallerRPC.Pages.Models
     {
         public int ID { get; set; }
 
+       
         [Required]
         public string UserName { get; set; }
+
+       
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
         [Required]
         [Display(Name = "First Name")]
+        
         public string FirstName { get; set; }
+
+        
         [DataType(DataType.Date)]
         [Required]
         public DateTime BirthDay { get; set; }
+
+
         [Required]
         public string Password { get; set; }
-
+       
     }
 }
